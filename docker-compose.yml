@@ -20,7 +20,7 @@ services:
 
   app:
     build: .
-    image: tynysbai-akzhol-student-api:v1.0-tynysbai-akzhol
+    image: tynysbai-akzhol-student-api:v1.1-tynysbai-akzhol
     container_name: tynysbai-akzhol-app
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB}
