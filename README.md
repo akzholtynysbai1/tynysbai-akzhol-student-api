@@ -7,3 +7,8 @@ Student: Akzhol Tynysbai | Group: IT2-2306 | Student ID: 38313 | Course: DevOps 
 - `POST /api/students` - create a student
 - `PUT /api/students/{id}` - update a student (added in feature/tynysbai-akzhol-crud)
 - `DELETE /api/students/{id}` - delete a student
+
+## CI/CD (Jenkins)
+- Job: Tynysbai_Akzhol_Student_API
+- Stages: Checkout -> Build -> Test -> Docker Build -> Verify
+- Trigger: Poll SCM every 2 minutes
