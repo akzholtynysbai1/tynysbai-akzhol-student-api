@@ -39,7 +39,7 @@ public class StudentController {
 
     @GetMapping("/api/students/{id}")
     public Student getById(@PathVariable("id") Long id) {
-        return repository.findById(id).orElse(null);
+        return findStudent(id);
     }
 
     @PostMapping("/api/students")
