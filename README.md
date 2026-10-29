@@ -1,5 +1,5 @@
 # Tynysbai Akzhol Student API
-Student: Akzhol Tynysbai, Group: IT2-2306, ID: 38313
+Student: Akzhol Tynysbai, Group: IT2-2306, ID: 38313 - Documentation: see API section below
 
 ## CRUD API (author: Akzhol Tynysbai)
 - `GET /api/students` - get all students
