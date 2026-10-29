@@ -22,6 +22,6 @@ class StudentApiTests {
         Student saved = repository.save(
                 new Student("Akzhol", "Tynysbai", "IT2-2306", "akzhol.tynysbai@example.com"));
         assertNotNull(saved.getId());
-        assertEquals("WrongSurname", repository.findById(saved.getId()).orElseThrow().getLastName());
+        assertEquals("Tynysbai", repository.findById(saved.getId()).orElseThrow().getLastName());
     }
 }
