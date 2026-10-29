@@ -29,7 +29,8 @@ public class StudentController {
                 "application", "Tynysbai Akzhol Student API",
                 "student", "Akzhol Tynysbai",
                 "group", "IT2-2306",
-                "studentId", "38313");
+                "studentId", "38313",
+                "version", "1.1");
     }
 
     @GetMapping("/api/students")
