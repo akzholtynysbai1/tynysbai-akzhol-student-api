@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 public class StudentController {
@@ -37,7 +39,7 @@ public class StudentController {
 
     @GetMapping("/api/students/{id}")
     public Student getById(@PathVariable("id") Long id) {
-        return repository.findById(id).orElse(null);
+        return findStudent(id);
     }
 
     @PostMapping("/api/students")
@@ -47,9 +49,25 @@ public class StudentController {
         return repository.save(student);
     }
 
+    @PutMapping("/api/students/{id}")
+    public Student update(@PathVariable("id") Long id, @RequestBody Student updated) {
+        Student student = findStudent(id);
+        student.setFirstName(updated.getFirstName());
+        student.setLastName(updated.getLastName());
+        student.setGroupName(updated.getGroupName());
+        student.setEmail(updated.getEmail());
+        return repository.save(student);
+    }
+
     @DeleteMapping("/api/students/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") Long id) {
         repository.deleteById(id);
+    }
+
+    private Student findStudent(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Student with id " + id + " not found"));
     }
 }
