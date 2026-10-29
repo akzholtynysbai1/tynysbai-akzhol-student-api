@@ -1,0 +1,41 @@
+name: tynysbai-akzhol-student-api
+
+services:
+  db:
+    image: postgres:16
+    container_name: tynysbai-akzhol-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - tynysbai_akzhol_pgdata:/var/lib/postgresql/data
+    networks:
+      - tynysbai_akzhol_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build: .
+    image: tynysbai-akzhol-student-api:v1.0-tynysbai-akzhol
+    container_name: tynysbai-akzhol-app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "8081:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - tynysbai_akzhol_net
+
+volumes:
+  tynysbai_akzhol_pgdata:
+
+networks:
+  tynysbai_akzhol_net:

@@ -31,3 +31,8 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+// Fixed JAR name for Docker - Tynysbai Akzhol
+tasks.named('bootJar') {
+    archiveFileName = 'app.jar'
+}
